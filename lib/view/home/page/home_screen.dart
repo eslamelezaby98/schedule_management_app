@@ -3,6 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:schedule_management_app/view/config/assets/assets.dart';
 import 'package:schedule_management_app/view/config/theme/color.dart';
 
+import '../widget/subject_widget.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -29,15 +31,27 @@ class HomeScreen extends StatelessWidget {
                 child: SizedBox(
                   height: MediaQuery.sizeOf(context).height * 0.56,
                   width: double.infinity,
-                  child: const Card(
+                  child: Card(
                     margin: EdgeInsets.zero,
-                    shape: RoundedRectangleBorder(
+                    shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20),
                         topRight: Radius.circular(20),
                       ),
                     ),
                     color: AppColor.white,
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        left: 20,
+                      ),
+                      child: ListView(
+                        children: const [
+                          SubjectsWidget(),
+
+                          //TODO: Your Schedule
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               ),
