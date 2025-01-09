@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:schedule_management_app/view/config/theme/color.dart';
+import 'package:schedule_management_app/config/theme/color.dart';
 
 import '../model/subject.dart';
 import 'title_widget.dart';

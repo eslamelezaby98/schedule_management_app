@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:schedule_management_app/view/config/assets/assets.dart';
-import 'package:schedule_management_app/view/config/theme/color.dart';
+import 'package:schedule_management_app/config/assets/assets.dart';
+import 'package:schedule_management_app/config/theme/color.dart';
 import 'package:schedule_management_app/view/home/widget/your_schedule_widget.dart';
-
 import '../widget/subject_widget.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -59,7 +58,7 @@ class HomeScreen extends StatelessWidget {
           ),
           Positioned(
             right: 0,
-            top: 100,
+            top: 50,
             child: Align(
               alignment: Alignment.center,
               child: SvgPicture.asset(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import '../../config/assets/assets.dart';
+import '../../../config/assets/assets.dart';
 
 class SubjectModel {
   String title;
