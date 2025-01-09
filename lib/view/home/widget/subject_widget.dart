@@ -1,8 +1,11 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:schedule_management_app/view/config/theme/color.dart';
 
 import '../model/subject.dart';
+import 'title_widget.dart';
 
 class SubjectsWidget extends StatelessWidget {
   const SubjectsWidget({super.key});
@@ -10,25 +13,12 @@ class SubjectsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          "Subjects",
-          style: TextStyle(
-            color: Color(0xff212523),
-            fontWeight: FontWeight.bold,
-            fontSize: 24,
-          ),
+        const TitleWidget(
+          subtitle: "Recommendations for you",
+          title: "Subjects",
         ),
-        const SizedBox(height: 5),
-        const Text(
-          "Recommendations for you",
-          style: TextStyle(
-            color: Color(0xffBCC1CD),
-            fontWeight: FontWeight.w400,
-            fontSize: 14,
-          ),
-        ),
-        const SizedBox(height: 5),
         SizedBox(
           height: 130,
           child: ListView.builder(
@@ -47,7 +37,10 @@ class SubjectsWidget extends StatelessWidget {
                     children: [
                       Align(
                         alignment: Alignment.topRight,
-                        child: SvgPicture.asset(subject.shape),
+                        child: SvgPicture.asset(
+                          subject.shape,
+                          color: subject.shapeColor,
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(16.0),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:schedule_management_app/view/config/assets/assets.dart';
 import 'package:schedule_management_app/view/config/theme/color.dart';
+import 'package:schedule_management_app/view/home/widget/your_schedule_widget.dart';
 
 import '../widget/subject_widget.dart';
 
@@ -47,8 +48,7 @@ class HomeScreen extends StatelessWidget {
                       child: ListView(
                         children: const [
                           SubjectsWidget(),
-
-                          //TODO: Your Schedule
+                          YourScheduleWidget(),
                         ],
                       ),
                     ),
