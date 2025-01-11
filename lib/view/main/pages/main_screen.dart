@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:schedule_management_app/view/home/page/home_screen.dart';
 
+import '../../schedule/page/schedule_screen.dart';
+
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
@@ -11,7 +13,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   List screens = [
     const HomeScreen(),
-    const SizedBox(),
+    const ScheduleScreen(),
     const SizedBox(),
     const SizedBox(),
   ];
@@ -35,7 +37,7 @@ class _MainScreenState extends State<MainScreen> {
             label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.note_outlined),
+            icon: Icon(Icons.calendar_month_outlined),
             label: '',
           ),
           BottomNavigationBarItem(
