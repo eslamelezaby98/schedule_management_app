@@ -1,10 +1,7 @@
-import 'package:flutter/cupertino.dart';
+import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
-
+import 'package:schedule_management_app/view/schedule/model/courses_model.dart';
 import '../../../config/assets/assets.dart';
-import '../../../config/theme/color.dart';
 
 class ScheduleScreen extends StatelessWidget {
   const ScheduleScreen({super.key});
@@ -17,6 +14,7 @@ class ScheduleScreen extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(height: 30),
+            //* header
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Row(
@@ -80,7 +78,10 @@ class ScheduleScreen extends StatelessWidget {
                 ],
               ),
             ),
+
             const SizedBox(height: 30),
+
+            //* courses
             Expanded(
               child: Card(
                 elevation: 0,
@@ -94,8 +95,23 @@ class ScheduleScreen extends StatelessWidget {
                     horizontal: 30,
                     vertical: 10,
                   ),
-                  child: Column(
+                  child: ListView(
                     children: [
+                      DatePicker(
+                        DateTime.now(),
+                        initialSelectedDate: DateTime.now(),
+                        selectionColor: const Color(0xffFF7648),
+                        selectedTextColor: Colors.white,
+                        onDateChange: (date) {},
+                        height: 90,
+                      ),
+                      const SizedBox(height: 10),
+                      const Divider(
+                        thickness: 1,
+                        color: Color(0xffFAF9F9),
+                      ),
+                      const SizedBox(height: 10),
+                      //* header
                       const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -128,160 +144,168 @@ class ScheduleScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Expanded(
-                        child: ListView.builder(
-                          itemCount: 10,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 20),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Expanded(
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+
+                      //* courses
+                      Stack(
+                        children: [
+                          ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: courses.length,
+                            itemBuilder: (context, index) {
+                              var course = courses[index];
+                              Color cardColor = course.isActive
+                                  ? const Color(0xff4DC591)
+                                  : const Color(0xffF6F6F5);
+                              Color textColor = course.isActive
+                                  ? Colors.white
+                                  : const Color(0xff212525);
+                              Color iconColor = course.isActive
+                                  ? Colors.white
+                                  : const Color(0xff88889D);
+                              return Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 10),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Column(
                                       children: [
-                                        const Column(
-                                          children: [
-                                            Text(
-                                              "11:35",
-                                              style: TextStyle(
-                                                color: Color(0xff212525),
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            SizedBox(height: 10),
-                                            Text(
-                                              "11:35",
-                                              style: TextStyle(
-                                                color: Color(0xffBCC1CD),
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          ],
+                                        Text(
+                                          course.time,
+                                          style: const TextStyle(
+                                            color: Color(0xff212525),
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
-                                        const SizedBox(width: 20),
-                                        Expanded(
-                                          child: Card(
-                                            elevation: 0,
-                                            color: const Color(0xff4DC591),
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(16),
-                                            ),
-                                            child: const Padding(
-                                              padding: EdgeInsets.all(8.0),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
+                                        const SizedBox(height: 10),
+                                        Text(
+                                          course.timeUp,
+                                          style: const TextStyle(
+                                            color: Color(0xffBCC1CD),
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(width: 20),
+                                    Expanded(
+                                      child: Card(
+                                        elevation: 0,
+                                        color: cardColor,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(16),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Column(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
+                                                  Text(
+                                                    course.name,
+                                                    style: TextStyle(
+                                                      color: textColor,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 16,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    course.subtitle,
+                                                    style: TextStyle(
+                                                      color: textColor,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 12,
+                                                    ),
+                                                  ),
+                                                  const SizedBox(height: 20),
                                                   Column(
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
                                                             .start,
                                                     children: [
-                                                      Text(
-                                                        "Mathematics",
-                                                        style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 16,
-                                                        ),
-                                                      ),
-                                                      Text(
-                                                        "Chapter 1: Introduction",
-                                                        style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontSize: 12,
-                                                        ),
-                                                      ),
-                                                      SizedBox(height: 20),
-                                                      Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
+                                                      Row(
                                                         children: [
-                                                          Row(
-                                                            children: [
-                                                              Icon(
-                                                                Icons
-                                                                    .place_outlined,
-                                                                color: AppColor
-                                                                    .white,
-                                                              ),
-                                                              SizedBox(
-                                                                  width: 10),
-                                                              Text(
-                                                                "Room 2-168",
-                                                                style:
-                                                                    TextStyle(
-                                                                  color: AppColor
-                                                                      .white,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                  fontSize: 12,
-                                                                ),
-                                                              ),
-                                                            ],
+                                                          Icon(
+                                                            Icons
+                                                                .place_outlined,
+                                                            color: iconColor,
                                                           ),
-                                                          SizedBox(height: 10),
-                                                          Row(
-                                                            children: [
-                                                              Image(
-                                                                image:
-                                                                    AssetImage(
-                                                                  "${AppAssets.images}user.png",
-                                                                ),
-                                                              ),
-                                                              SizedBox(
-                                                                  width: 10),
-                                                              Text(
-                                                                "Julie Watson",
-                                                                style:
-                                                                    TextStyle(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                  fontSize: 12,
-                                                                ),
-                                                              ),
-                                                            ],
+                                                          const SizedBox(
+                                                              width: 10),
+                                                          Text(
+                                                            course.room,
+                                                            style: TextStyle(
+                                                              color: textColor,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              fontSize: 12,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      const SizedBox(
+                                                          height: 10),
+                                                      Row(
+                                                        children: [
+                                                          const Image(
+                                                            image: AssetImage(
+                                                              "${AppAssets.images}user.png",
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                              width: 10),
+                                                          Text(
+                                                            course.userName,
+                                                            style: TextStyle(
+                                                              color: textColor,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              fontSize: 12,
+                                                            ),
                                                           ),
                                                         ],
                                                       ),
                                                     ],
                                                   ),
-                                                  Icon(
-                                                    Icons.more_vert,
-                                                    color: Colors.white,
-                                                  ),
                                                 ],
                                               ),
-                                            ),
+                                              Icon(
+                                                Icons.more_vert,
+                                                color: iconColor,
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                      ],
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                        ),
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+                          Positioned(
+                            left: 45,
+                            child: Container(
+                              color: const Color(0xffFAF9F9),
+                              width: 2,
+                              height: MediaQuery.sizeOf(context).height,
+                            ),
+                          )
+                        ],
                       ),
                     ],
                   ),
